@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;600;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Artificial Restaurant Sentiment Analysis</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .main-page {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #004aad;
+        cursor: pointer;
+      }
+
+      .brand-image {
+        margin: 0.5rem;
+      }
+
+      .brand_title {
+        color: white;
+      }
+
+      .main-container {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        background-color: #eaeaea;
+      }
+
+      .footer-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: #303030;
+      }
+
+      .copyright-text {
+        padding: 0.5rem 0;
+        color: white;
+        font-size: small;
+      }
+
+      .main-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .title-message {
+        align-self: flex-start;
+        margin-left: 2rem;
+      }
+
+      .title-message h2 {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.5rem;
+      }
+
+      .wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        justify-content: space-evenly;
+      }
+
+      .left-side {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        margin: 2rem;
+      }
+
+      .rest-image {
+        border: 0.3rem solid white;
+        border-radius: 5px;
+      }
+
+      .right-side {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: flex-start;
+        flex: 2;
+      }
+
+      .text_label {
+        font-family: "Poppins", sans-serif;
+        font-size: large;
+        padding: 1rem 0;
+      }
+
+      .txt_user_review {
+        width: 70%;
+        padding: 0.5rem;
+      }
+
+      .btn_submit_review {
+        padding: 0.5rem 2rem;
+        border: 0;
+        border-radius: 10px;
+        background-color: #004aad;
+        color: white;
+        font-size: large;
+        letter-spacing: 1px;
+        cursor: pointer;
+      }
+
+      .prediction_block {
+        width: 100%;
+        align-self: flex-start;
+        margin: 1rem 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .prediction-status-positive {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .prediction-status-positive p {
+        padding: 1rem;
+        margin: 0.5rem;
+        background-color: green;
+        color: white;
+        border-radius: 10px;
+      }
+
+      .prediction-status-negative {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .prediction-status-negative p {
+        padding: 1rem;
+        margin: 0.5rem;
+        background-color: red;
+        color: white;
+        border-radius: 10px;
+      }
+
+      .pred-message-negative {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .feedback-improvement-options {
+        width: 70%;
+        align-self: flex-start;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .pred-checkbox {
+        margin: 0.5rem;
+      }
+
+      .btn-send-feedback {
+        padding: 0.5rem;
+        border: 0;
+        border-radius: 8px;
+        background-color: orange;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .improvement-text {
+        color: green;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-page">
+      <div class="header-wrapper">
+        <img
+          class="brand-image"
+          src="{{url_for('static', filename='images/brand_logo.png')}}"
+          alt="AI Authentic Restaurant Band"
+          width="40px"
+          height="40px"
+        />
+        <h1 class="brand_title">AI Authentic Restaurant</h1>
+      </div>
+      <div class="main-container">
+        <div class="title-message">
+          <h2>Welcome to AI Authentic Restaurant</h2>
+        </div>
+        <div class="wrapper">
+          <div class="left-side">
+            <img
+              class="rest-image"
+              src="{{url_for('static', filename='images/restaurant_image.png')}}"
+              width="450px"
+              height="450px"
+            />
+          </div>
+          <div class="right-side">
+            <div>
+              <label class="text_label">
+                Please enter your feedback to improve our products and services
+              </label>
+              <textarea
+                class="txt_user_review"
+                name="user_review"
+                id="txt_review"
+                rows="8"
+                cols="50"
+                placeholder="Please provide your valuable review.."
+                required
+              ></textarea>
+              <p>
+                <button
+                  class="btn_submit_review"
+                  name="submit"
+                  onclick="onSubmitReview()"
+                >
+                  Submit
+                </button>
+              </p>
+            </div>
+            <div class="prediction_block">
+              <div class="prediction-status-positive">
+                <p>
+                  We are delighted to know that you liked our food and services,
+                  please refer our restaurant to your friends
+                </p>
+                <div class="pred-emoji-positive">
+                  <img
+                    src="{{url_for('static', filename='images/like.png')}}"
+                    width="20%"
+                  />
+                </div>
+              </div>
+              <div class="prediction-status-negative">
+                <div class="pred-message-negative">
+                  <p>
+                    We are sad to know that you did not like our food and
+                    services, please let us know what can be improved
+                  </p>
+                  <div class="pred-emoji-negative">
+                    <img
+                      src="{{url_for('static', filename='images/dislike.png')}}"
+                      width="20%"
+                    />
+                  </div>
+                </div>
+                <div class="feedback-improvement-options">
+                  <div class="pred-checkbox">
+                    <input
+                      type="checkbox"
+                      value="quality"
+                      id="quality"
+                      name="quality"
+                    />
+                    <label for="quality">Food quality, taste</label>
+                  </div>
+                  <div class="pred-checkbox">
+                    <input
+                      type="checkbox"
+                      value="price"
+                      id="price"
+                      name="price"
+                    />
+                    <label for="price">Price</label>
+                  </div>
+                  <div class="pred-checkbox">
+                    <input
+                      type="checkbox"
+                      value="ambient"
+                      id="ambient"
+                      name="ambient"
+                    />
+                    <label for="ambient">Ambient</label>
+                  </div>
+                  <div class="pred-checkbox">
+                    <button
+                      class="btn-send-feedback"
+                      onclick="onImprovementFeedback()"
+                    >
+                      Send Feedback
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="improvement-text" id="improvement-text">
+                  Thank You for submitting feedback for improvement!!
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-wrapper">
+        <p class="copyright-text">
+          &copy; 2022-2023 Lam To Ngan(Ivy) & Smitesh Tamboli
+        </p>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    $(document).ready(function () {
+      $("#reivew_wrapper").hide();
+      $(".prediction_block").hide();
+      $("#improvement-text").hide();
+    });
+
+    function onImprovementFeedback() {
+      $("#improvement-text").show();
+    }
+
+    function onSubmitReview() {
+      var userreview = $.trim($("#txt_review").val());
+
+      userreview = userreview.trim();
+
+      if (userreview.length <= 0) {
+        alert("Please provide feedback..");
+      } else {
+        var data = {
+          review: userreview,
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "http://127.0.0.1:5000/review",
+          contentType: "application/json;charset=UTF-8",
+          data: JSON.stringify(data),
+          dataType: "json",
+          success: function (result) {
+            console.log(result["sentiment"]);
+            var sentiment = parseInt(result["sentiment"]);
+
+            if (sentiment === 1) {
+              console.log("Positive");
+              $(".prediction_block").show();
+              $(".prediction-status-positive").show();
+              $(".prediction-status-negative").hide();
+            } else {
+              console.log("Negative");
+              $(".prediction_block").show();
+              $(".prediction-status-positive").hide();
+              $(".prediction-status-negative").show();
+            }
+          },
+        });
+      }
+    }
+  </script>
+</html>

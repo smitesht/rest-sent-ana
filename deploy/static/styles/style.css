@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+.main-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #004aad;
+  cursor: pointer;
+}
+
+.brand-image {
+  margin: 0.5rem;
+}
+
+.brand_title {
+  color: white;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #eaeaea;
+}
+
+.footer-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #303030;
+}
+
+.copyright-text {
+  padding: 0.5rem 0;
+  color: white;
+  font-size: small;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-message {
+  align-self: flex-start;
+  margin-left: 2rem;
+}
+
+.title-message h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-evenly;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  margin: 2rem;
+}
+
+.rest-image {
+  border: 0.3rem solid white;
+  border-radius: 5px;
+}
+
+.right-side {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: flex-start;
+  flex: 2;
+}
+
+.text_label {
+  font-family: "Poppins", sans-serif;
+  font-size: large;
+  padding: 1rem 0;
+}
+
+.txt_user_review {
+  width: 70%;
+  padding: 0.5rem;
+}
+
+.btn_submit_review {
+  padding: 0.5rem 2rem;
+  border: 0;
+  border-radius: 10px;
+  background-color: #004aad;
+  color: white;
+  font-size: large;
+  letter-spacing: 1px;
+}
